@@ -26,6 +26,7 @@
   transform: translateZ(40px);
 }
 
-.app .name {
+.app .name,
+.app .pokemon {
   text-align: left;
 }
