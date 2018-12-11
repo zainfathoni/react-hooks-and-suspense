@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Counter } from './exercises/01';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Counter from './exercises/counter'
+import './App.css'
 
 class App extends Component {
   render() {
@@ -11,8 +10,8 @@ class App extends Component {
           <Counter />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
