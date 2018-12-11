@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Upper({ children }) {
+const Upper = React.memo(function Upper({ children }) {
   const [count, setCount] = useState(0)
   console.log('rendering', children)
   return (
@@ -9,7 +9,7 @@ function Upper({ children }) {
       <button onClick={() => setCount(count + 1)}>{count}</button>
     </div>
   )
-}
+})
 
 function Name() {
   const [first, setFirstName] = useState('')
