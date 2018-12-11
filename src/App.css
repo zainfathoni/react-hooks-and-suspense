@@ -14,12 +14,14 @@
   cursor: pointer;
 }
 
-.app .tilt {
+.app .tilt .tilt-root {
   background: linear-gradient(135deg, #04f700, #12dbf1);
   padding: 40px;
+  transform-style: preserve-3d;
 }
 
 .app .tilt .totally-centered {
   background: white;
   padding: 8px;
+  transform: translateZ(40px);
 }
