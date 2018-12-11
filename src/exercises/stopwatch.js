@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef } from 'react'
 
 function reducer(currentState, newState) {
-  return {...currentState, ...newState}
+  return { ...currentState, ...newState }
 }
 
 function useStopwatch() {
@@ -31,7 +31,7 @@ function useStopwatch() {
     setState({ lapse: 0, running: false })
   }
 
-  return {handleClearClick, handleRunClick, lapse, running}
+  return { handleClearClick, handleRunClick, lapse, running }
 }
 
 function Stopwatch() {
@@ -40,7 +40,7 @@ function Stopwatch() {
 
   return (
     <>
-      <div style={{textAlign: 'center'}}>
+      <div style={{ textAlign: 'center' }}>
         <label
           style={{
             fontFamily: 'monospace',
@@ -50,14 +50,18 @@ function Stopwatch() {
         >
           {stopwatchOne.lapse}ms
         </label>
-        <button onClick={stopwatchOne.handleRunClick} style={buttonStyles}>{stopwatchOne.running ? 'Stop' : 'Start'}</button>
-        <button onClick={stopwatchOne.handleClearClick} style={buttonStyles}>Clear</button>
+        <button onClick={stopwatchOne.handleRunClick} style={buttonStyles}>
+          {stopwatchOne.running ? 'Stop' : 'Start'}
+        </button>
+        <button onClick={stopwatchOne.handleClearClick} style={buttonStyles}>
+          Clear
+        </button>
       </div>
       <hr />
       <strong>Lapse Difference:</strong>
       <span>{stopwatchOne.lapse - stopwatchTwo.lapse}ms</span>
       <hr />
-      <div style={{textAlign: 'center'}}>
+      <div style={{ textAlign: 'center' }}>
         <label
           style={{
             fontFamily: 'monospace',
@@ -67,8 +71,12 @@ function Stopwatch() {
         >
           {stopwatchTwo.lapse}ms
         </label>
-        <button onClick={stopwatchTwo.handleRunClick} style={buttonStyles}>{stopwatchTwo.running ? 'Stop' : 'Start'}</button>
-        <button onClick={stopwatchTwo.handleClearClick} style={buttonStyles}>Clear</button>
+        <button onClick={stopwatchTwo.handleRunClick} style={buttonStyles}>
+          {stopwatchTwo.running ? 'Stop' : 'Start'}
+        </button>
+        <button onClick={stopwatchTwo.handleClearClick} style={buttonStyles}>
+          Clear
+        </button>
       </div>
     </>
   )
