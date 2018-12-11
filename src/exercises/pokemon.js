@@ -3,15 +3,22 @@ import fetchPokemon from './fetch-pokemon'
 
 const cache = {}
 
-function PokemonInfo({ pokemonName }) {
-  // This is what happens under the hood of react-cache
-  const pokemon = cache[pokemonName]
-  if (!pokemon) {
-    const promise = fetchPokemon(pokemonName).then(
-      p => (cache[pokemonName] = p)
-    )
-    throw promise // This thrown promise will be caught by the closest Suspense parent
+function createResource(fn) {
+  return {
+    read(id) {
+      const data = cache[id]
+      if (!data) {
+        const promise = fn(id).then(p => (cache[id] = p))
+        throw promise
+      }
+      return data
+    }
   }
+}
+const myPokemon = createResource(fetchPokemon)
+
+function PokemonInfo({ pokemonName }) {
+  const pokemon = myPokemon.read(pokemonName)
   return <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
 }
 
