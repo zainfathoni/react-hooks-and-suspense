@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Tilt from './exercises/tilt'
 import './App.css'
+import Stopwatch from './exercises/stopwatch'
 
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="tilt">
-          <Tilt />
+        <div className="stopwatch">
+          <Stopwatch />
         </div>
       </div>
     )
