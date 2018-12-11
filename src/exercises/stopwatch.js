@@ -4,7 +4,7 @@ function reducer(currentState, newState) {
   return {...currentState, ...newState}
 }
 
-function Stopwatch() {
+function useStopwatch() {
   const [{ running, lapse }, setState] = useReducer(reducer, {
     lapse: 0,
     running: false
@@ -31,20 +31,46 @@ function Stopwatch() {
     setState({ lapse: 0, running: false })
   }
 
+  return {handleClearClick, handleRunClick, lapse, running}
+}
+
+function Stopwatch() {
+  const stopwatchOne = useStopwatch()
+  const stopwatchTwo = useStopwatch()
+
   return (
-    <div style={{textAlign: 'center'}}>
-      <label
-        style={{
-          fontFamily: 'monospace',
-          fontSize: '5em',
-          display: 'block'
-        }}
-      >
-        {lapse}ms
-      </label>
-      <button onClick={handleRunClick} style={buttonStyles}>{running ? 'Stop' : 'Start'}</button>
-      <button onClick={handleClearClick} style={buttonStyles}>Clear</button>
-    </div>
+    <>
+      <div style={{textAlign: 'center'}}>
+        <label
+          style={{
+            fontFamily: 'monospace',
+            fontSize: '5em',
+            display: 'block'
+          }}
+        >
+          {stopwatchOne.lapse}ms
+        </label>
+        <button onClick={stopwatchOne.handleRunClick} style={buttonStyles}>{stopwatchOne.running ? 'Stop' : 'Start'}</button>
+        <button onClick={stopwatchOne.handleClearClick} style={buttonStyles}>Clear</button>
+      </div>
+      <hr />
+      <strong>Lapse Difference:</strong>
+      <span>{stopwatchOne.lapse - stopwatchTwo.lapse}ms</span>
+      <hr />
+      <div style={{textAlign: 'center'}}>
+        <label
+          style={{
+            fontFamily: 'monospace',
+            fontSize: '5em',
+            display: 'block'
+          }}
+        >
+          {stopwatchTwo.lapse}ms
+        </label>
+        <button onClick={stopwatchTwo.handleRunClick} style={buttonStyles}>{stopwatchTwo.running ? 'Stop' : 'Start'}</button>
+        <button onClick={stopwatchTwo.handleClearClick} style={buttonStyles}>Clear</button>
+      </div>
+    </>
   )
 }
 
