@@ -1,20 +1,7 @@
 import React, { Suspense, useState } from 'react'
+import { unstable_createResource as createResource } from 'react-cache'
 import fetchPokemon from './fetch-pokemon'
 
-const cache = {}
-
-function createResource(fn) {
-  return {
-    read(id) {
-      const data = cache[id]
-      if (!data) {
-        const promise = fn(id).then(p => (cache[id] = p))
-        throw promise
-      }
-      return data
-    }
-  }
-}
 const myPokemon = createResource(fetchPokemon)
 
 function PokemonInfo({ pokemonName }) {
