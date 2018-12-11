@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 
+function useCounter({ initialState, step }) {
+  const [count, setCount] = useState(initialState)
+  const increment = () => setCount(count + step)
+  return { count, increment }
+}
+
 function Counter() {
-  const [count, setCount] = useState(0)
-  const incrementCount = () => setCount(currentCount => currentCount + 1)
-  return <button onClick={incrementCount}>{count}</button>
+  const { count, increment } = useCounter({ initialState: 0, step: 1 })
+  return <button onClick={increment}>{count}</button>
 }
 
 export default Counter
