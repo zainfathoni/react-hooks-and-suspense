@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import Tilt from './tilt'
+import React, { Suspense, useState } from 'react'
+
+const Tilt = React.lazy(() => import('./tilt'))
 
 function useToggle(init = false) {
   const [on, setOn] = useState(init)
@@ -13,10 +14,19 @@ function ToggledTilt() {
     <div>
       <label htmlFor="show-tilt-checkbox">
         Show Tilt{' '}
-        <input checked={showTilt} id="show-tilt-checkbox" onChange={toggleTilt} type="checkbox" />
+        <input
+          checked={showTilt}
+          id="show-tilt-checkbox"
+          onChange={toggleTilt}
+          type="checkbox"
+        />
       </label>
-      <div style={{height: 114, width: 184}}>
-        {showTilt && <Tilt /> }
+      <div style={{ height: 114, width: 184 }}>
+        {showTilt ? (
+          <Suspense fallback={<div>loading...</div>}>
+            <Tilt />
+          </Suspense>
+        ) : null}
       </div>
     </div>
   )
