@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Counter from './exercises/counter'
+import Tilt from './exercises/tilt'
 import './App.css'
 
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="counter">
-          <Counter />
+        <div className="tilt">
+          <Tilt />
         </div>
       </div>
     )

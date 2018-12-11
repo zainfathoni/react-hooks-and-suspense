@@ -13,3 +13,13 @@
   border: 2px solid grey;
   cursor: pointer;
 }
+
+.app .tilt {
+  background: linear-gradient(135deg, #04f700, #12dbf1);
+  padding: 40px;
+}
+
+.app .tilt .totally-centered {
+  background: white;
+  padding: 8px;
+}
