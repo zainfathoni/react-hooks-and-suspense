@@ -1,8 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useReducer, useRef } from 'react'
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'CLEAR':
+      return {
+        ...state,
+        lapse: 0,
+        running: false
+      }
+    case 'LAPSE': 
+      return {
+        ...state,
+        lapse: action.now - action.startTime
+      }
+    case 'TOGGLE_RUNNING':
+      return {
+        ...state,
+        running: !state.running
+      }
+    default:
+      return state
+  }
+}
 
 function Stopwatch() {
-  const [lapse, setLapse] = useState(0)
-  const [running, setRunning] = useState(false)
+  const [{ running, lapse }, dispatch] = useReducer(reducer, {
+    lapse: 0,
+    running: false
+  })
   const intervalRef = useRef(null)
 
   // Make sure that the callback function is only run one time and that it returns the cleanup function
@@ -14,16 +39,15 @@ function Stopwatch() {
     } else {
       const startTime = Date.now() - lapse
       intervalRef.current = setInterval(() => {
-        setLapse(Date.now() - startTime)
+        dispatch({ now: Date.now(), startTime, type: 'LAPSE' })
       }, 0)
     }
-    setRunning(!running)
+    dispatch({ type: 'TOGGLE_RUNNING' })
   }
 
   function handleClearClick() {
     clearInterval(intervalRef.current)
-    setLapse(0)
-    setRunning(false)
+    dispatch({ type: 'CLEAR' })
   }
 
   return (
