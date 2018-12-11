@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './App.css'
-import Name from './exercises/name'
+import ToggledTilt from './exercises/toggled-tilt'
 
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="name">
-          <Name />
+        <div className="tilt">
+          <ToggledTilt />
         </div>
       </div>
     )
