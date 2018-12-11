@@ -25,3 +25,7 @@
   padding: 8px;
   transform: translateZ(40px);
 }
+
+.app .name {
+  text-align: left;
+}
