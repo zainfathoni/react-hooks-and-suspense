@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import fetchPokemon from './fetch-pokemon'
 
+const cache = {}
+
 function PokemonInfo({ pokemonName }) {
-  const pokemon = { pokemonName }
+  // This is what happens under the hood of react-cache
+  const pokemon = cache[pokemonName]
+  if (!pokemon) {
+    const promise = fetchPokemon(pokemonName).then(
+      p => (cache[pokemonName] = p)
+    )
+    throw promise // This thrown promise will be caught by the closest Suspense parent
+  }
   return <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
 }
 
@@ -24,7 +33,11 @@ function Pokemon() {
         </div>
       </form>
       <div>
-        {pokemonName ? <PokemonInfo pokemonName={pokemonName} /> : null}
+        {pokemonName ? (
+          <Suspense fallback={<div>loading...</div>}>
+            <PokemonInfo pokemonName={pokemonName} />
+          </Suspense>
+        ) : null}
       </div>
     </div>
   )

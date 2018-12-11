@@ -28,7 +28,7 @@ function fetchPokemon(name) {
       method: 'POST'
     })
     .then(r => r.json())
-    .ten(response => response.data.pokemon)
+    .then(response => response.data.pokemon)
 }
 
 export default fetchPokemon
